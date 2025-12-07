@@ -140,3 +140,29 @@ body {
   font-size: 0.9rem;
   color: #a45b7b;
 }
+/* 🌸 Ramos completados (tachados) */
+.course.completed {
+    background: var(--done) !important;
+    color: #555;
+    text-decoration: line-through;
+}
+
+/* 🌸 Ramos desbloqueados (disponibles para tomar) */
+.course.unlocked {
+    background: var(--unlocked) !important;
+    border-color: var(--accent);
+    color: var(--text-main);
+}
+
+/* 🌸 Ramos bloqueados (no disponibles) */
+.course.locked {
+    background: var(--locked) !important;
+    color: #777;
+}
+
+/* 🌸 Efecto hover suave */
+.course:hover {
+    background: var(--card-hover);
+    transform: scale(1.03);
+    transition: 0.2s ease;
+}
