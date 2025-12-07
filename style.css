@@ -1,1 +1,262 @@
+:root {
+  --bg: #ffeaf4;
+  --card: #ffd5ea;
+  --card-hover: #ffc3e0;
+  --card-border: #f3a7cf;
+  --text-main: #3d2535;
+  --accent: #e05aa6;
+  --accent-soft: #f4a4c9;
+  --done: #c7c7c7;
+  --unlocked: #ffffff;
+  --locked: #f1bfdc;
+}
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+}
+
+/* TOP BAR */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #f5c4dc;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.title-block {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.title-block .emoji {
+  font-size: 1.6rem;
+}
+
+.top-bar h1 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.top-bar p {
+  font-size: 0.75rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.stats {
+  font-size: 0.8rem;
+  background: #ffe0f2;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #f4b9dd;
+}
+
+/* LAYOUT */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 260px) 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.sidebar {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 0.9rem;
+  border: 1px solid #f5c4dc;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 0.95rem;
+}
+
+.year-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.year-tab {
+  flex: 1 1 45%;
+  border-radius: 999px;
+  border: 1px solid #f4b9dd;
+  background: #ffe4f2;
+  padding: 0.3rem 0.4rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.year-tab.active {
+  background: var(--accent);
+  color: white;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #f1a4cf;
+  margin-bottom: 0.8rem;
+}
+
+.reset-btn:hover {
+  background: #ffe9f5;
+}
+
+.legend h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+}
+
+.legend p {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.1rem 0;
+  font-size: 0.75rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid #c8a2c8;
+}
+
+.dot.done {
+  background: #d0d0d0;
+}
+
+.dot.unlocked {
+  background: #ffffff;
+}
+
+.dot.locked {
+  background: #f5c3de;
+}
+
+/* GRID AREA */
+
+.grid-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.semester {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 0.6rem 0.8rem 0.8rem;
+  border: 1px solid #f5c4dc;
+}
+
+.semester h2 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.courses-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.course {
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  flex: 1 1 45%;
+  text-align: left;
+  min-width: 130px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease;
+}
+
+.course:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(206, 120, 170, 0.35);
+  background: var(--card-hover);
+}
+
+/* Estados */
+
+.course.completed {
+  text-decoration: line-through;
+  background: #e1e1e1;
+  color: #777;
+  border-color: #c5c5c5;
+}
+
+.course.locked {
+  opacity: 0.5;
+  background: var(--locked);
+}
+
+.course.unlocked {
+  background: var(--card);
+}
+
+/* INFO PANEL */
+
+.info-panel {
+  margin: 0 1rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 0.8rem 1rem;
+  border: 1px solid #f5c4dc;
+  font-size: 0.83rem;
+}
+
+.info-panel h2 {
+  margin-top: 0;
+  font-size: 0.95rem;
+}
+
+.info-panel p {
+  margin: 0.2rem 0;
+}
+
+/* FOOTER */
+
+.footer {
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 0.7rem 1rem 1.2rem;
+  color: #7c4d6b;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: -1;
+  }
+}
