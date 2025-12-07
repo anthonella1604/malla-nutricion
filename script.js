@@ -1,5 +1,5 @@
-// Utilidad: convertir NodeList a array
-const $ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
+// Utilidad para seleccionar elementos
+const $ = (query, ctx = document) => Array.from(ctx.querySelectorAll(query));
 
 const courses = $(".course");
 const totalCountSpan = document.getElementById("total-count");
@@ -7,7 +7,7 @@ const completedCountSpan = document.getElementById("completed-count");
 const yearTabs = $(".year-tab");
 
 const infoTitle = document.getElementById("info-title");
-const infoSem = document.getElementById("info-semester");
+const infoSem = document.getElementById("info-sem");
 const infoStatus = document.getElementById("info-status");
 const infoPrereqs = document.getElementById("info-prereqs");
 const infoOpens = document.getElementById("info-opens");
@@ -16,92 +16,83 @@ const resetBtn = document.getElementById("reset-btn");
 // Construimos mapa de cursos
 const courseMap = {};
 courses.forEach(btn => {
-  const id = btn.dataset.id;
-  const name = btn.textContent.trim();
-  const sem = btn.dataset.semester;
-  const prereqs = (btn.dataset.prereqs || "")
-    .split(",")
-    .map(s => s.trim())
-    .filter(s => s.length > 0);
-  const opens = (btn.dataset.opens || "")
-    .split(",")
-    .map(s => s.trim())
-    .filter(s => s.length > 0);
+    const id = btn.dataset.id;
+    const name = btn.textContent.trim();
+    const sem = btn.dataset.semester;
+    const prereqs = (btn.dataset.prereqs || "")
+        .split(",")
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+    const opens = (btn.dataset.opens || "")
+        .split(",")
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
 
-  courseMap[id] = { id, name, sem, prereqs, opens, done: false, btn };
+    courseMap[id] = {
+        id,
+        name,
+        sem,
+        prereqs,
+        opens,
+        completed: false,
+        element: btn
+    };
 });
 
-// Actualizar pantalla
-function updateUI() {
-  let total = courses.length;
-  let completed = 0;
+// Actualizar contador
+function updateCounter() {
+    const total = Object.keys(courseMap).length;
+    const completed = Object.values(courseMap).filter(c => c.completed).length;
 
-  for (let id in courseMap) {
-    const c = courseMap[id];
-    const button = c.btn;
-
-    button.classList.remove("done", "locked", "unlocked");
-
-    if (c.done) {
-      button.classList.add("done");
-      completed++;
-    } else if (c.prereqs.length === 0 || c.prereqs.every(p => courseMap[p]?.done)) {
-      button.classList.add("unlocked");
-    } else {
-      button.classList.add("locked");
-    }
-  }
-
-  totalCountSpan.textContent = total;
-  completedCountSpan.textContent = completed;
+    totalCountSpan.textContent = total;
+    completedCountSpan.textContent = completed;
 }
 
-// Click en curso
-courses.forEach(button => {
-  button.addEventListener("click", () => {
-    const id = button.dataset.id;
-    const course = courseMap[id];
+// Mostrar información del curso
+function showCourseInfo(id) {
+    const c = courseMap[id];
 
-    // Mostrar info
-    infoTitle.textContent = course.name;
-    infoSem.textContent = course.sem;
-    infoStatus.textContent = course.done ? "Completado" : "Pendiente";
-    infoPrereqs.textContent =
-      course.prereqs.length > 0
-        ? course.prereqs.map(p => courseMap[p]?.name).join(", ")
-        : "Sin requisitos";
-    infoOpens.textContent =
-      course.opens.length > 0
-        ? course.opens.map(o => courseMap[o]?.name).join(", ")
-        : "No habilita cursos";
+    infoTitle.textContent = c.name;
+    infoSem.textContent = "Semestre: " + c.sem;
+    infoStatus.textContent = c.completed ? "Estado: Completado 💖" : "Estado: No completado";
 
-    // Alternar estado
-    course.done = !course.done;
-    updateUI();
-  });
-});
+    infoPrereqs.textContent = c.prereqs.length > 0 ? c.prereqs.join(", ") : "Ninguno";
+    infoOpens.textContent = c.opens.length > 0 ? c.opens.join(", ") : "Ninguno";
+}
 
-// Cambiar semestre
-yearTabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    yearTabs.forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
+// Marcar curso como completado
+courses.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const id = btn.dataset.id;
+        const c = courseMap[id];
 
-    const year = tab.dataset.year;
+        c.completed = !c.completed;
+        btn.classList.toggle("done");
 
-    $(".year-block").forEach(block => {
-      block.style.display = block.dataset.year === year ? "grid" : "none";
+        showCourseInfo(id);
+        updateCounter();
     });
-  });
 });
 
-// Botón reset
+// Tabs de años
+yearTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+        const year = tab.dataset.year;
+        document.querySelectorAll(".semester").forEach(sec => {
+            sec.style.display = sec.dataset.year === year ? "block" : "none";
+        });
+
+        yearTabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+    });
+});
+
+// Botón de reset
 resetBtn.addEventListener("click", () => {
-  for (let id in courseMap) {
-    courseMap[id].done = false;
-  }
-  updateUI();
-});
+    Object.values(courseMap).forEach(c => {
+        c.completed = false;
+        c.element.classList.remove("done");
+    });
 
-// Inicializar
-updateUI();
+    updateCounter();
+});
