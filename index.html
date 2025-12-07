@@ -1,26 +1,259 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Malla Nutrición UTA</title>
-    <style>
-        body {
-            background-color: #ffe4ec;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-        }
-        h1 {
-            color: #d63384;
-        }
-        p {
-            color: #444;
-            font-size: 18px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Malla Nutrición UTA · Antho</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>✨ ¡Tu página está funcionando, Antho! ✨</h1>
-    <p>Ahora podemos crear tu malla curricular interactiva 💗</p>
+  <header class="top-bar">
+    <div class="title-block">
+      <span class="emoji">🎓</span>
+      <div>
+        <h1>Malla Nutrición y Dietética</h1>
+        <p>Universidad de Tarapacá · Panel interactivo de Antho ✨</p>
+      </div>
+    </div>
+    <div class="stats">
+      <span id="completed-count">0</span>/<span id="total-count">0</span> ramos aprobados
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="sidebar">
+      <h2>Años</h2>
+      <div class="year-tabs">
+        <button class="year-tab active" data-year="1">Año 1</button>
+        <button class="year-tab" data-year="2">Año 2</button>
+        <button class="year-tab" data-year="3">Año 3</button>
+        <button class="year-tab" data-year="4">Año 4</button>
+        <button class="year-tab" data-year="5">Año 5</button>
+      </div>
+
+      <button id="reset-btn" class="reset-btn">Reiniciar malla</button>
+
+      <div class="legend">
+        <h3>Leyenda</h3>
+        <p><span class="dot done"></span> Aprobado</p>
+        <p><span class="dot unlocked"></span> Habilitado</p>
+        <p><span class="dot locked"></span> Bloqueado (faltan requisitos)</p>
+      </div>
+    </section>
+
+    <section class="grid-area">
+      <!-- SEMESTRE 1 -->
+      <section class="semester" data-year="1">
+        <h2>I Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="anat" data-semester="1" data-prereqs="">
+            Anatomía
+          </button>
+          <button class="course" data-id="biolHum" data-semester="1" data-prereqs="">
+            Biología Humana
+          </button>
+          <button class="course" data-id="introCarr" data-semester="1" data-prereqs="">
+            Introducción a la Carrera de Nutrición
+          </button>
+          <button class="course" data-id="quimGenOrg" data-semester="1" data-prereqs="">
+            Química General y Orgánica
+          </button>
+          <button class="course" data-id="mates" data-semester="1" data-prereqs="">
+            Matemáticas
+          </button>
+          <button class="course" data-id="ingBas" data-semester="1" data-prereqs="">
+            Inglés Básico
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 2 -->
+      <section class="semester" data-year="1">
+        <h2>II Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="fisioNutr" data-semester="2" data-prereqs="anat,biolHum">
+            Fisiología y Nutrición
+          </button>
+          <button class="course" data-id="microAlim" data-semester="2" data-prereqs="biolHum">
+            Microbiología de los Alimentos
+          </button>
+          <button class="course" data-id="parasiAlim" data-semester="2" data-prereqs="biolHum">
+            Parasitología de los Alimentos
+          </button>
+          <button class="course" data-id="bioqNutr" data-semester="2" data-prereqs="quimGenOrg">
+            Bioquímica Nutricional
+          </button>
+          <button class="course" data-id="cienAlim" data-semester="2" data-prereqs="quimGenOrg">
+            Ciencias de los Alimentos
+          </button>
+          <button class="course" data-id="ingTec" data-semester="2" data-prereqs="ingBas">
+            Inglés Técnico
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 3 -->
+      <section class="semester" data-year="2">
+        <h2>III Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="fisioPatNutr" data-semester="3" data-prereqs="fisioNutr">
+            Fisiopatología y Nutrición
+          </button>
+          <button class="course" data-id="enferBas" data-semester="3" data-prereqs="">
+            Enfermería Básica
+          </button>
+          <button class="course" data-id="psicoSalud" data-semester="3" data-prereqs="">
+            Psicología de la Salud
+          </button>
+          <button class="course" data-id="segHigAlim" data-semester="3" data-prereqs="microAlim,cienAlim">
+            Seguridad e Higiene Alimentaria
+          </button>
+          <button class="course" data-id="gestSaludFam" data-semester="3" data-prereqs="">
+            Gestión en Salud Familiar
+          </button>
+          <button class="course" data-id="bioetica" data-semester="3" data-prereqs="">
+            Bioética
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 4 -->
+      <section class="semester" data-year="2">
+        <h2>IV Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="planTecDiet" data-semester="4" data-prereqs="bioqNutr,fisioNutr">
+            Planificación y Técnicas Dietéticas
+          </button>
+          <button class="course" data-id="tecAlim" data-semester="4" data-prereqs="cienAlim">
+            Tecnología de los Alimentos
+          </button>
+          <button class="course" data-id="evalEN" data-semester="4" data-prereqs="fisioNutr,bioqNutr">
+            Evaluación del Estado Nutricional
+          </button>
+          <button class="course" data-id="farmaNutr" data-semester="4" data-prereqs="fisioNutr">
+            Farmacología y Nutrición
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 5 -->
+      <section class="semester" data-year="3">
+        <h2>V Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="nutrInf" data-semester="5" data-prereqs="planTecDiet,evalEN">
+            Nutrición Infantil
+          </button>
+          <button class="course" data-id="nutrAdultoMayor" data-semester="5" data-prereqs="planTecDiet,evalEN">
+            Nutrición del Adulto y Adulto Mayor
+          </button>
+          <button class="course" data-id="liderGestNutr" data-semester="5" data-prereqs="gestSaludFam">
+            Liderazgo y Gestión en Nutrición
+          </button>
+          <button class="course" data-id="nutrActFisDep" data-semester="5" data-prereqs="fisioNutr">
+            Nutrición, Actividad Física y Deporte
+          </button>
+          <button class="course" data-id="bioestad" data-semester="5" data-prereqs="mates">
+            Bioestadística
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 6 -->
+      <section class="semester" data-year="3">
+        <h2>VI Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="educAlimNutr" data-semester="6" data-prereqs="nutrInf,nutrAdultoMayor">
+            Educación en Alimentación y Nutrición
+          </button>
+          <button class="course" data-id="admServAlimNutr" data-semester="6" data-prereqs="liderGestNutr">
+            Administración en Servicios de Alimentación y Nutrición
+          </button>
+          <button class="course" data-id="dietInf" data-semester="6" data-prereqs="nutrInf">
+            Dietoterapia Infantil
+          </button>
+          <button class="course" data-id="dietetica" data-semester="6" data-prereqs="planTecDiet">
+            Dietotécnica
+          </button>
+          <button class="course" data-id="saludPubNutrEpi" data-semester="6" data-prereqs="bioestad">
+            Salud Pública Nutrición y Epidemiología
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 7 -->
+      <section class="semester" data-year="4">
+        <h2>VII Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="metInvestig" data-semester="7" data-prereqs="bioestad">
+            Metodología de la Investigación
+          </button>
+          <button class="course" data-id="pratDietInf" data-semester="7" data-prereqs="dietInf">
+            Práctica de Dietoterapia Infantil
+          </button>
+          <button class="course" data-id="dietAdultoMayor" data-semester="7" data-prereqs="dietetica,nutrAdultoMayor">
+            Dietoterapia del Adulto y Adulto Mayor
+          </button>
+          <button class="course" data-id="gestServAlimNutr2" data-semester="7" data-prereqs="admServAlimNutr">
+            Gestión en Servicios de Alimentación y Nutrición
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 8 -->
+      <section class="semester" data-year="4">
+        <h2>VIII Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="actGradoInv" data-semester="8" data-prereqs="metInvestig">
+            Actividad de Grado: Investigación Alimentaria Nutricional
+          </button>
+          <button class="course" data-id="pratDietAdultoMayor" data-semester="8" data-prereqs="dietAdultoMayor">
+            Práctica de Dietoterapia Adulto y Adulto Mayor
+          </button>
+          <button class="course" data-id="saludFamCom" data-semester="8" data-prereqs="saludPubNutrEpi">
+            Salud Familiar y Comunitaria
+          </button>
+          <button class="course" data-id="electProf" data-semester="8" data-prereqs="">
+            Electivo de Formación Profesional
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 9 -->
+      <section class="semester" data-year="5">
+        <h2>IX Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="pratSaludFamCom" data-semester="9" data-prereqs="saludFamCom">
+            Práctica Salud Familiar y Comunitaria
+          </button>
+          <button class="course" data-id="pratGestServAlimNutr" data-semester="9" data-prereqs="gestServAlimNutr2">
+            Práctica Gestión en Servicios de Alimentación y Nutrición
+          </button>
+        </div>
+      </section>
+
+      <!-- SEMESTRE 10 -->
+      <section class="semester" data-year="5">
+        <h2>X Semestre</h2>
+        <div class="courses-grid">
+          <button class="course" data-id="actTitulInternado" data-semester="10" data-prereqs="actGradoInv,pratSaludFamCom,pratGestServAlimNutr">
+            Actividad de Titulación · Internado
+          </button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <section class="info-panel">
+    <h2 id="info-title">Selecciona un ramo 💗</h2>
+    <p id="info-sem"></p>
+    <p id="info-status"></p>
+    <p><strong>Prerrequisitos:</strong> <span id="info-prereqs">—</span></p>
+    <p><strong>Este ramo abre:</strong> <span id="info-opens">—</span></p>
+  </section>
+
+  <footer class="footer">
+    Hecho con 💕 por Antho para organizar su malla de Nutrición UTA.
+  </footer>
 </body>
 </html>
