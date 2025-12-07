@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Malla Nutrición · Antho</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
 </head>
@@ -24,129 +24,146 @@
     </div>
 </header>
 
-<!-- Tabs de años -->
-<div class="year-tabs">
+<nav class="year-tabs">
     <button class="year-tab active" data-year="1">1° Año</button>
     <button class="year-tab" data-year="2">2° Año</button>
     <button class="year-tab" data-year="3">3° Año</button>
     <button class="year-tab" data-year="4">4° Año</button>
     <button class="year-tab" data-year="5">5° Año</button>
-</div>
+</nav>
 
-<!-- Contenedor general -->
-<div id="courses-container">
+<main>
 
-    <!-- ====================== 1ER AÑO ====================== -->
-    <section class="year-content active" data-year="1">
+    <!-- ========== AÑO 1 ========== -->
+    <section class="year" data-year="1">
 
-        <h2>Semestre 1</h2>
-        <div class="grid">
-            <button class="course" data-id="anat" data-semester="1">Anatomía</button>
-            <button class="course" data-id="biohum" data-semester="1">Biología Humana</button>
-            <button class="course" data-id="intro" data-semester="1">Introducción a la Carrera</button>
-            <button class="course" data-id="qgo" data-semester="1">Química General y Orgánica</button>
-            <button class="course" data-id="mate" data-semester="1">Matemáticas</button>
-            <button class="course" data-id="ingbas" data-semester="1">Inglés Básico</button>
-        </div>
+        <!-- SEMESTRE 1 -->
+        <section class="semester" data-sem="1">
+            <h2>Semestre 1</h2>
+            <div class="courses-grid">
 
-        <h2>Semestre 2</h2>
-        <div class="grid">
-            <button class="course" data-id="fisio" data-semester="2">Fisiología y Nutrición</button>
-            <button class="course" data-id="micro" data-semester="2">Microbiología de los Alimentos</button>
-            <button class="course" data-id="parasit" data-semester="2">Parasitología de los Alimentos</button>
-            <button class="course" data-id="bioq" data-semester="2">Bioquímica Nutricional</button>
-            <button class="course" data-id="ciencias" data-semester="2">Ciencias de los Alimentos</button>
-            <button class="course" data-id="ingt" data-semester="2">Inglés Técnico</button>
-        </div>
+                <button class="course" 
+                    data-id="anato1"
+                    data-semester="1"
+                    data-prereqs=""
+                    data-opens="anato2">
+                    Anatomía
+                </button>
+
+                <button class="course"
+                    data-id="biohum"
+                    data-semester="1"
+                    data-prereqs=""
+                    data-opens="bioqui1">
+                    Biología Humana
+                </button>
+
+                <button class="course"
+                    data-id="introCarr"
+                    data-semester="1"
+                    data-prereqs=""
+                    data-opens="fisioNutri">
+                    Introducción a la Carrera
+                </button>
+
+                <button class="course"
+                    data-id="quimGen"
+                    data-semester="1"
+                    data-prereqs=""
+                    data-opens="bioqui1">
+                    Química General y Orgánica
+                </button>
+
+                <button class="course"
+                    data-id="mate1"
+                    data-semester="1"
+                    data-prereqs=""
+                    data-opens="bioestad">
+                    Matemáticas
+                </button>
+
+                <button class="course"
+                    data-id="ingles1"
+                    data-semester="1"
+                    data-prereqs=""
+                    data-opens="ingles2">
+                    Inglés Básico
+                </button>
+
+            </div>
+        </section>
+
+        <!-- SEMESTRE 2 -->
+        <section class="semester" data-sem="2">
+            <h2>Semestre 2</h2>
+            <div class="courses-grid">
+
+                <button class="course"
+                    data-id="fisioNutri"
+                    data-semester="2"
+                    data-prereqs="introCarr"
+                    data-opens="nutri2,metabol1">
+                    Fisiología y Nutrición
+                </button>
+
+                <button class="course"
+                    data-id="microAli"
+                    data-semester="2"
+                    data-prereqs="biohum"
+                    data-opens="higAlim">
+                    Microbiología de los Alimentos
+                </button>
+
+                <button class="course"
+                    data-id="parasitAli"
+                    data-semester="2"
+                    data-prereqs="biohum"
+                    data-opens="">
+                    Parasitología de los Alimentos
+                </button>
+
+                <button class="course"
+                    data-id="bioqui1"
+                    data-semester="2"
+                    data-prereqs="quimGen,biohum"
+                    data-opens="bioqui2,metabol1">
+                    Bioquímica Nutricional
+                </button>
+
+                <button class="course"
+                    data-id="cienAli"
+                    data-semester="2"
+                    data-prereqs="quimGen"
+                    data-opens="tecAlim">
+                    Ciencias de los Alimentos
+                </button>
+
+                <button class="course"
+                    data-id="ingles2"
+                    data-semester="2"
+                    data-prereqs="ingles1"
+                    data-opens="">
+                    Inglés Técnico
+                </button>
+
+            </div>
+        </section>
 
     </section>
 
-    <!-- ====================== 2DO AÑO ====================== -->
-    <section class="year-content" data-year="2">
+    <!-- Aquí siguen los años 2, 3, 4 y 5... -->
+</main>
 
-        <h2>Semestre 3</h2>
-        <div class="grid">
-            <button class="course">Fisiopatología y Nutrición</button>
-            <button class="course">Enfermería Básica</button>
-            <button class="course">Psicología de la Salud</button>
-            <button class="course">Seguridad e Higiene Alimentaria</button>
-            <button class="course">Gestión en Salud Familiar</button>
-            <button class="course">Bioética</button>
-        </div>
+<section class="info-panel">
+    <h2 id="info-title">Selecciona un ramo 💗</h2>
+    <p id="info-sem"></p>
+    <p id="info-status"></p>
+    <p><strong>Prerrequisitos:</strong> <span id="info-prereqs"></span></p>
+    <p><strong>Este ramo abre:</strong> <span id="info-opens"></span></p>
+</section>
 
-        <h2>Semestre 4</h2>
-        <div class="grid">
-            <button class="course">Planificación y Técnicas Dietéticas</button>
-            <button class="course">Tecnología de los Alimentos</button>
-            <button class="course">Evaluación del Estado Nutricional</button>
-            <button class="course">Farmacología y Nutrición</button>
-            <button class="course">Nutrición, Actividad Física y Deporte</button>
-            <button class="course">Bioestadística</button>
-        </div>
-
-    </section>
-
-    <!-- ====================== 3ER AÑO ====================== -->
-    <section class="year-content" data-year="3">
-
-        <h2>Semestre 5</h2>
-        <div class="grid">
-            <button class="course">Nutrición Infantil</button>
-            <button class="course">Nutrición del Adulto y Adulto Mayor</button>
-            <button class="course">Liderazgo y Gestión en Nutrición</button>
-            <button class="course">Dietotecnia</button>
-            <button class="course">Salud Pública Nutrición y Epidemiología</button>
-        </div>
-
-        <h2>Semestre 6</h2>
-        <div class="grid">
-            <button class="course">Educación en Alimentación y Nutrición</button>
-            <button class="course">Administración en Servicios de Alimentación</button>
-            <button class="course">Dietoterapia Infantil</button>
-            <button class="course">Dietoterapia del Adulto y Adulto Mayor</button>
-            <button class="course">Gestión en Servicios de Alimentación</button>
-        </div>
-    </section>
-
-    <!-- ====================== 4TO AÑO ====================== -->
-    <section class="year-content" data-year="4">
-
-        <h2>Semestre 7</h2>
-        <div class="grid">
-            <button class="course">Metodología de la Investigación</button>
-            <button class="course">Práctica de Dietoterapia Infantil</button>
-            <button class="course">Electivo Profesional</button>
-        </div>
-
-        <h2>Semestre 8</h2>
-        <div class="grid">
-            <button class="course">Investigación Alimentaria Nutricional</button>
-            <button class="course">Práctica de Dietoterapia Adulto y Adulto Mayor</button>
-            <button class="course">Salud Familiar y Comunitaria</button>
-        </div>
-
-    </section>
-
-    <!-- ====================== 5TO AÑO ====================== -->
-    <section class="year-content" data-year="5">
-
-        <h2>Semestre 9</h2>
-        <div class="grid">
-            <button class="course">Práctica Salud Familiar y Comunitaria</button>
-            <button class="course">Práctica Gestión en Servicios de Alimentación</button>
-        </div>
-
-        <h2>Semestre 10</h2>
-        <div class="grid">
-            <button class="course">Internado / Titulación</button>
-        </div>
-
-    </section>
-
-</div>
-
-<footer>
-    <p>Hecho con 💗 por Antho</p>
+<footer class="footer">
+    Hecho con 💞 por Antho para organizar su malla
 </footer>
 
 </body>
