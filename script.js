@@ -63,6 +63,38 @@ function showCourseInfo(id) {
 // Marcar curso como completado
 courses.forEach(btn => {
     btn.addEventListener("click", () => {
+    btn.classList.toggle("completed");
+
+    // marcar como completado
+    const completed = btn.classList.contains("completed");
+
+    // actualizar conteo
+    updateCount();
+
+    // actualizar ramos que abre
+    updateLocks();
+});
+    function updateLocks() {
+    courses.forEach(btn => {
+        const prereqs = (btn.dataset.prereqs || "")
+            .split(",")
+            .map(s => s.trim())
+            .filter(s => s.length > 0);
+
+        const allMet = prereqs.every(id => {
+            const prereqBtn = courseMap[id];
+            return prereqBtn && prereqBtn.classList.contains("completed");
+        });
+
+        if (prereqs.length === 0 || allMet) {
+            btn.classList.remove("locked");
+            btn.classList.add("unlocked");
+        } else {
+            btn.classList.add("locked");
+            btn.classList.remove("unlocked");
+        }
+    });
+}
         const id = btn.dataset.id;
         const c = courseMap[id];
 
